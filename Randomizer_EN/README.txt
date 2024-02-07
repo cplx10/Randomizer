@@ -5,5 +5,5 @@ of possible results and outputs a random one using a simple Python script.
 
 Just open the program and follow the instructions displayed. Have fun!
 ---
-Randomizer v1.2; 06 February 2024
+Randomizer v1.2.1; 06 February 2024
 Made by cplx.

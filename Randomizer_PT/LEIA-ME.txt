@@ -5,5 +5,5 @@ infinitos e escolhe um para você utilizando um simples script de Python.
 
 Só abra o programa e siga as instruções que aparecem. Divirta-se!
 ---
-Randomizer v1.2; 06 Fevereiro 2024
+Randomizer v1.2.1; 06 Fevereiro 2024
 Feito por cplx.

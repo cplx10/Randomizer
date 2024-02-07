@@ -1,4 +1,4 @@
-#Randomizer v1.2/06 Feb 2024 | Made by cplx; 11 Dec 2021.
+#Randomizer v1.2.1/06 Feb 2024 | Made by cplx; 11 Dec 2021.
 
 from keyword import iskeyword
 import random
@@ -23,8 +23,11 @@ def Main():
         if choiceEvent == 'x': break
         else: Events.append(choiceEvent)
 
+    if not Events:
+        input('---\nYou must insert at least 1 event!\nPress enter to try again.'), Main()
+
     clearcmd()
-    
+
     result = str(random.choices(Events))
     print('The chosen event is: '+result.strip("['']")+'.')
 
@@ -44,5 +47,5 @@ def startCode():
     elif start in validNo: choiceContD()
     else: print(errorInput), startCode()
 
-print('Welcome to the Randomizer v1.2!\nThis program lets you input a (near) infinite number of events into an algorith which randomly chooses one of them.')
+print('Welcome to the Randomizer v1.2.1!\nThis program lets you input a (near) infinite number of events into an algorith which randomly chooses one of them.')
 startCode()

@@ -1,5 +1,8 @@
 --UPDATE LOGS/PATCH NOTES FOR THE RANDOMIZER--
 
+Version 1.2.1/06Feb24 #Patch:
+	Fixed empty event list bug.
+
 Version 1.2/06Feb24 #Update:
 	Translated to Portuguese;
 	New clearcmd() function added;

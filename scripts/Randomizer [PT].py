@@ -1,4 +1,4 @@
-#Randomizer v1.2/06 Feb 2024 | Feito por cplx; 11 Dec 2021.
+#Randomizer v1.2.1/06 Feb 2024 | Feito por cplx; 11 Dec 2021.
 
 from keyword import iskeyword
 import random
@@ -23,6 +23,9 @@ def Main():
         if choiceEvent == 'x': break
         else: Events.append(choiceEvent)
 
+    if not Events:
+        input('---\nVocê deve inserir pelo menos 1 evento!\nPressione enter para tentar de novo.'), Main()
+
     clearcmd()
     
     result = str(random.choices(Events))
@@ -44,5 +47,5 @@ def startCode():
     elif start in validNo: choiceContD()
     else: print(errorInput), startCode()
 
-print('Bem-vindo(a) ao Randomizer v1.2!\nEste programa lhe deixa inserir eventos (quase) infinitos em um algoritmo que escolhe um deles aleatoriamente.')
+print('Bem-vindo(a) ao Randomizer v1.2.1!\nEste programa lhe deixa inserir eventos (quase) infinitos em um algoritmo que escolhe um deles aleatoriamente.')
 startCode()
