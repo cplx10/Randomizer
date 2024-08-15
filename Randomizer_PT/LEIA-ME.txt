@@ -1,9 +1,0 @@
-Oi! Obrigado por baixar o programa e por favor leia este documento.
-
-O Randomizer é um programa que lhe permite inserir eventos (quase)
-infinitos e escolhe um para você utilizando um simples script de Python.
-
-Só abra o programa e siga as instruções que aparecem. Divirta-se!
----
-Randomizer v1.2.1; 06 Fevereiro 2024
-Feito por cplx.
