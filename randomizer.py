@@ -95,9 +95,10 @@ class Main:
         textMenuOptionLanguage   = message_response.get("textMenuOptionLanguage")
 
         # importing variables: generics
-        genericChooseAction = message_response.get("genericChooseAction")
-        genericChooseExit   = message_response.get("genericChooseExit")
-        genericEnterBack    = message_response.get("genericEnterBack")
+        genericChooseAction     = message_response.get("genericChooseAction")
+        genericChooseExit       = message_response.get("genericChooseExit")
+        genericEnterBack        = message_response.get("genericEnterBack")
+        genericMenuManagePreset = message_response.get("genericMenuManagePreset")
 
         # this will keep running until the function is called again
         while True:
@@ -106,21 +107,23 @@ class Main:
             print(textMenuWelcome+version+'!\n')
 
             start = list_input(genericChooseAction,
-                            choices=[(textMenuOptionRandomizer, '1'), (textMenuOptionDice, '2'), (textMenuOptionNew, '3'),
+                            choices=[(textMenuOptionRandomizer, '1'), (textMenuOptionDice, '2'), (textMenuOptionNew, '3'),(genericMenuManagePreset, '4'),
                                         (textMenuOptionAbout, 'a'), (textMenuOptionLanguage, 'l'), (genericChooseExit, 'x')],
                             )
 
             match start:
-                case '1': Randomizer.Main(message_response)     # run the Randomizer
-                case '2': Main.DiceMenu(message_response)       # run Roll a Die!
-                case '3':                                       # what's new in the program
+                case '1': Randomizer.Main(message_response)      # run the Randomizer
+                case '2': Main.DiceMenu(message_response)        # run Roll a Die!
+                case '3':                                        # what's new in the program
                     clearcmd(), print(textMenuNew)
                     getpass(genericEnterBack)
-                case 'a':                                       # about the program
+                case '4':
+                    Randomizer.PresetRandomizer(message_response)
+                case 'a':                                        # about the program
                     clearcmd(), print(textMenuAbout)
                     getpass(genericEnterBack)
-                case 'l': break                                 # switch languages
-                case 'x': Main.choiceContinue(message_response) # exit
+                case 'l': break                                  # switch languages
+                case 'x': Main.choiceContinue(message_response)  # exit
     
     #
     
@@ -156,13 +159,13 @@ class Main:
             # importing variables: welcome message
             textDiceMenuWelcome = message_response.get("textDiceMenuWelcome")
 
-            # importing variables: selection menu (generics)
-            genericChooseAction = message_response.get("genericChooseAction")
-            genericChooseExit   = message_response.get("genericChooseExit")
+            # importing variables: generics
+            genericMenuManagePreset = message_response.get("genericMenuManagePreset")
+            genericChooseAction     = message_response.get("genericChooseAction")
+            genericChooseExit       = message_response.get("genericChooseExit")
 
             # importing variables: selection menu
             textDiceMenuOptionRoll   = message_response.get("textDiceMenuOptionRoll")
-            textDiceMenuOptionPreset = message_response.get("textDiceMenuOptionPreset")
             textDiceMenuOptionReturn = message_response.get("textDiceMenuOptionReturn")
             
             
@@ -170,7 +173,7 @@ class Main:
             
             # selection menu
             choicestart = list_input(genericChooseAction,
-                                choices=[(textDiceMenuOptionRoll, '1'),(textDiceMenuOptionPreset, '2'),
+                                choices=[(textDiceMenuOptionRoll, '1'),(genericMenuManagePreset, '2'),
                                          (textDiceMenuOptionReturn, '3'),(genericChooseExit,'x')]
                                 )
 
@@ -286,6 +289,82 @@ class Randomizer:
             case 'x':                                       # exits
                 Main.choiceContinue(message_response)
                 return False
+    
+    #
+
+    def PresetRandomizer(message_response):
+        # importing variables: generics
+        genericChooseAction = message_response.get("genericChooseAction")
+        genericChooseReturn = message_response.get("genericChooseReturn")
+
+        # importing variables: list_input options
+        genericPresetOptionNew    = message_response.get("genericPresetOptionNew")
+        genericPresetOptionLoad   = message_response.get("genericPresetOptionLoad")
+        genericPresetOptionEdit   = message_response.get("genericPresetOptionEdit")
+        genericPresetOptionDelete = message_response.get("genericPresetOptionDelete")
+
+        clearcmd()
+
+        presets = PresetActions()
+
+        savechoice = list_input(genericChooseAction,
+                                choices=[(genericPresetOptionNew,'create'),
+                                        (genericPresetOptionLoad,'load'), (genericPresetOptionEdit, 'edit'),
+                                        (genericPresetOptionDelete,'delete'), (genericChooseReturn, 'x')],
+                            )
+         
+        match savechoice:
+
+            case 'create': # create a new dice preset
+
+                # importing variables: error messages
+                errorInvalidInput      = message_response.get("errorInvalidInput")
+                errorRandomizerNoEvent = message_response.get("errorRandomizerNoEvent")
+
+                # importing variables: preset texts
+                textPresetRandomizerNewType = message_response.get("textPresetRandomizerNewType")
+                genericPresetNewName        = message_response.get("genericPresetNewName")
+                
+                preset_rand = []
+
+                clearcmd()
+                print(textPresetRandomizerNewType)
+                    
+                while True:
+
+                    while True:
+                        input_rand = input(' > ').strip()
+
+                        if not input_rand: print(errorInvalidInput) # if input_rand has no content
+                        elif input_rand == 'x': break               # if input_rand is 'x'
+                        else:
+                            preset_rand.append(input_rand)          # adds event to preset_rand
+
+                    if not input_rand:                              # if the events list is empty
+                        getpass(errorRandomizerNoEvent)
+                        continue
+
+                    break
+                
+                preset_name = input(genericPresetNewName)
+                
+                presets.CreatePreset(message_response, 'rand', preset_name, preset_rand)
+            
+            case 'load': # load a dice preset
+
+                presets.LoadRandomizerPreset(message_response)
+
+            case 'edit': # edit a dice preset
+                
+                print('Work in progress!')
+                None
+            
+            case 'delete': # delete a dice preset
+                presets.DeletePreset(message_response, 'rand')
+            
+            case 'x': return
+        
+        presets.UpdatePresets() # update preset list
 
 #
 
@@ -409,7 +488,7 @@ class RollDice:
 
                 while True:
                     
-                    input_dice = input(' >>> d')
+                    input_dice = input(' > d')
                     if input_dice == 'x': break
 
                     try:
@@ -535,7 +614,7 @@ class PresetActions:
         textPresetDiceLoadTotal = message_response.get("textPresetDiceLoadTotal")
 
         # importing variables: generics
-        genericChooseAction = message_response.get("genericChooseAction")
+        genericChooseAction  = message_response.get("genericChooseAction")
         genericChooseReturn  = message_response.get("genericChooseReturn")
         
         while True:
@@ -596,14 +675,14 @@ class PresetActions:
 
         for block in self.presets:
             if block[1] == choose_preset_name:
-                PresetActions.RunRandomizerPreset(message_response, block[2])
-                return
-
-        return 0
+                presets = block[2]
+            
+        PresetActions.RunRandomizerPreset(message_response, presets)
+        return
 
     #
 
-    def RunRandomizerPreset(self, message_response, Events):
+    def RunRandomizerPreset(message_response, Events):
 
         # importing variables: header and information texts
         headerRandomizer            = message_response.get("headerRandomizer")
@@ -621,20 +700,22 @@ class PresetActions:
         textRandomizerOptionRerun1  = message_response.get("textRandomizerOptionRerun1")
         textRandomizerOptionRerun2  = message_response.get("textRandomizerOptionRerun2")
 
+        clearcmd()
+        temp_events = Events.copy()
         print(headerRandomizer)
 
-        while len(Events) > 1:                                           # events available + event picked + events left
-            result = str(rchoice(Events)).strip("[']")                   # picks a random event and formats to remove [] and ''
-            Events.remove(result)
-            evleft = str(Events).translate(str.maketrans('', '', "[']")) # formats events list to remove [] and ''
+        while len(temp_events) > 1:                                           # events available + event picked + events left
+            result = str(rchoice(temp_events)).strip("[']")                   # picks a random event and formats to remove [] and ''
+            temp_events.remove(result)
+            evleft = str(temp_events).translate(str.maketrans('', '', "[']")) # formats events list to remove [] and ''
 
             print(f'{textRandomizerEventsChosen}: {result}.\n{textRandomizerEventsLeft}: {evleft}.\n') # The chosen event is: {result}. Your events left: {evleft}.
 
-            if len(Events) == 1:
+            if len(temp_events) == 1:
                 break
             
             rerun = list_input(genericChooseAction,
-                               choices=[(f'{textRandomizerOptionRerun1}{len(Events)}{textRandomizerOptionRerun2}', '1'),
+                               choices=[(f'{textRandomizerOptionRerun1}{len(temp_events)}{textRandomizerOptionRerun2}', '1'),
                                         (genericChooseReturn, '3'), (genericChooseExit, 'x')],
                               )
             
@@ -645,11 +726,19 @@ class PresetActions:
                 case '3': return                  # retuns to menu
 
         # action once there's only one event left
-        evleft = str(Events).translate(str.maketrans('', '', "[']"))
+        evleft = str(temp_events).translate(str.maketrans('', '', "[']"))
         
         print(f'{textRandomizerEventsWarning} ({evleft})') # You only have one event left! ({evleft})
 
         getpass(genericEnterBack)
+
+    #
+
+    def EditPreset(self, message_response, type):
+
+        print('Work in progress!')
+
+        return
 
     #
 
