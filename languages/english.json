@@ -22,6 +22,8 @@
     "genericChooseExit"         : "Exit the program",
     "genericChooseReturn"       : "Return to menu",
 
+    "genericMenuManagePreset"   : "Manage presets",
+    
     "genericPresetOptionNew"    : "Create a new preset",
     "genericPresetOptionLoad"   : "Load a preset",
     "genericPresetOptionEdit"   : "Edit a preset (CURRENTLY NOT IN USE)",
@@ -66,7 +68,6 @@
     "textDiceMenuWelcome"      : "Welcome to Roll a Die!",
 
     "textDiceMenuOptionRoll"   : "Run Roll a Die!",
-    "textDiceMenuOptionPreset" : "Manage dice presets",
     "textDiceMenuOptionReturn" : "Return to the Randomizer",
 
     "textDiceRollType"         : "Type in the die you wanna roll (eg. d20)\n > d",
@@ -78,11 +79,13 @@
 
 
 
-    "textPresetDiceNewType"     : "[Creating a preset]\n\nType in the dice you wish to roll. Input x to stop adding items.\n",
+    "textPresetRandomizerNewType" : "[Creating a preset]\n\nType in the events you wish to use. Input x to stop adding items.\n",
+    
+    "textPresetDiceNewType"       : "[Creating a preset]\n\nType in the dice you wish to roll. Input x to stop adding items.\n",
 
-    "textPresetDiceLoadNote"    : "[Loading a preset]\n\nNote: when you load a preset, the program will automatically roll the dice for you.\n",
-    "textPresetDiceLoadStart"   : "Rolling dice...",
-    "textPresetDiceLoadTotal"   : "Total",
+    "textPresetDiceLoadNote"      : "[Loading a preset]\n\nNote: when you load a preset, the program will automatically roll the dice for you.\n",
+    "textPresetDiceLoadStart"     : "Rolling dice...",
+    "textPresetDiceLoadTotal"     : "Total",
 
     
 
