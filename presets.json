@@ -1,0 +1,26 @@
+[
+    {
+        "type": "dice",
+        "name": "All dice",
+        "info": [
+            2,
+            3,
+            4,
+            6,
+            8,
+            10,
+            12,
+            16,
+            20
+        ]
+    },
+    {
+        "type": "rand",
+        "name": "Random generic texts",
+        "info": [
+            "The quick brown fox jumps over the lazy dog",
+            "Lorem ipsum dolor sit amet",
+            "This is an example"
+        ]
+    }
+]
