@@ -1,7 +1,10 @@
 {
 
     "headerRandomizer"   : "[The Randomizer]\n",
-    "headerDice"         : "[Roll a Die!]\n",
+    "headerDice"         : "[Rolling Dice!]\n",
+    "headerPreset"       : "[Managing presets]\n",
+    "headerPresetNew"    : "[Creating a preset]\n",
+    "headerPresetEdit"   : "[Editing a preset]\n",
     "headerPresetDelete" : "[Deleting a preset]\n",
 
 
@@ -12,40 +15,50 @@
 
 
 
-    "genericYes"                : "Yes",
-    "genericNo"                 : "No",
+    "genericYes"                     : "Yes",
+    "genericNo"                      : "No",
 
-    "genericEnterBack"          : "Press enter to return.",
+    "genericEnterBack"               : "Press enter to return.",
 
-    "genericChooseAction"       : "Choose an action",
-    "genericChoosePreset"       : "Choose a preset",
-    "genericChooseExit"         : "Exit the program",
-    "genericChooseReturn"       : "Return to menu",
+    "genericChooseAction"            : "Choose an action",
+    "genericChoosePreset"            : "Choose a preset",
+    "genericChooseExit"              : "Exit the program",
+    "genericChooseReturn"            : "Return to menu",
 
-    "genericMenuManagePreset"   : "Manage presets",
+    "genericMenuManagePreset"        : "Manage presets",
+
+    "genericPresetCancel"            : "Operation cancelled.",
     
-    "genericPresetOptionNew"    : "Create a new preset",
-    "genericPresetOptionLoad"   : "Load a preset",
-    "genericPresetOptionEdit"   : "Edit a preset (CURRENTLY NOT IN USE)",
-    "genericPresetOptionDelete" : "Delete a preset",
+    "genericPresetOptionNew"         : "Create a new preset",
+    "genericPresetOptionLoad"        : "Load a preset",
+    "genericPresetOptionEdit"        : "Edit a preset",
+    "genericPresetOptionDelete"      : "Delete a preset",
 
-    "genericPresetNewCreate"    : "\nCreating preset...",
-    "genericPresetNewComplete"  : "\nPreset created!",
+    "genericPresetNewCreate"         : "\nCreating preset...",
+    "genericPresetNewComplete"       : "\nPreset created!",
 
-    "genericPresetNewName"      : "\nType in a name for the preset\n >>> ",
+    "genericPresetNewName"           : "\nType in a name for the preset\n > ",
 
-    "genericPresetDeleteCheck"  : "Are you sure about your decision? (This is not reversible)",
-    "genericPresetDeleteFinish" : "Item deleted.",
-    "genericPresetDeleteCancel" : "Operation cancelled.",
+    "genericPresetEditOptionAdd"     : "Add a new item",
+    "genericPresetEditOptionRemove"  : "Remove an item",
+    "genericPresetEditOptionConfirm" : "Confirm changes and return",
+    "genericPresetEditOptionCancel"  : "Cancel and return",
+
+    "genericPresetEditChooseRemove"  : "Choose an item to remove",
+
+    "genericPresetEditTextConfirm"   : "Changes saved!",
+    
+    "genericPresetDeleteCheck"       : "Are you sure about your decision? (This is not reversible)",
+    "genericPresetDeleteFinish"      : "Item deleted.",
 
 
 
     "textMenuWelcome"          : "Welcome to the Randomizer v",
-    "textMenuNew"              : "Here's what's new in the Randomizer 2.0.0:\n\n - New language selection menu!\nNow you can easily switch between the Portuguese and English versions of the Radomizer\nwithout having to manually open the file yourself!\n\n - Expanded 'main menu'!\nWe have expandede the amount of choices you could make in the program's 'main menu',\nmaking access to new features easy and simple.\n\n - Roll a Die!\nIntroduced with this new version, Roll a Die! is a dice roller built into the program,\nmaking your life easier if you want to use this as a way to roll your d20.\n\n\n",
+    "textMenuNew"              : "Here's what's new in the Randomizer 2.0.0:\n\n- New language selection menu (and a new translation)!\nNow you can easily switch between languages in the Randomizer without having to\nmanually open a seperate executable. Additionally, the Randomizer 2.0 also features\na new translation to Spanish!\n\n- Expanded 'main menu'!\nThe amount of choices you could make in the program's 'main menu' has been expanded,\nmaking access to new features easy and simple.\n\n- Rolling Dice!\nIntroduced with this new version, Rolling Dice! is a dice roller built into the program,\nmaking your life easier if you want to use this as a way to roll your d20.\n\n- Presets!\nA brand new feature in this version are presets! You can now save a list of events or\ndice to use at any time! You can create, load, edit and remove as many presets as your\nheart desires. Go wild and have fun!\n\n\n\n",
     "textMenuAbout"            : "[ABOUT THE RANDOMIZER]\n\nThe Randomizer is a program developed by cplx in Python.\n\nIt's initial use as a program to decide random events came\nto be with Starlight's LARP's on the Discord community\nserver The Reservoir. It's first release, version 1.0.0,\ncame to be on 11 December, 2021, and it has been receiving\nnew updates since February 2024, when cplx released version 1.2.0.\n\nFor further information on the history of updates + change logs,\ncheck UpdLogs.txt on the Randomizer's folder.\n\n\n",
 
     "textMenuOptionRandomizer" : "Start the Randomizer",
-    "textMenuOptionDice"       : "Roll a Die!",
+    "textMenuOptionDice"       : "Rolling Dice!",
     "textMenuOptionNew"        : "What's new",
     "textMenuOptionAbout"      : "About the Randomizer",
     "textMenuOptionLanguage"   : "Switch languages",
@@ -65,12 +78,12 @@
 
 
 
-    "textDiceMenuWelcome"      : "Welcome to Roll a Die!",
+    "textDiceMenuWelcome"      : "Welcome to Rolling Dice!",
 
-    "textDiceMenuOptionRoll"   : "Run Roll a Die!",
+    "textDiceMenuOptionRoll"   : "Roll a die",
     "textDiceMenuOptionReturn" : "Return to the Randomizer",
 
-    "textDiceRollType"         : "Type in the die you wanna roll (eg. d20)\n > d",
+    "textDiceRollType"         : "Type in the die you wish to roll (eg. d20)\n > d",
     "textDiceRoll"             : "You rolled a d",
     "textDiceRollResult"       : "Your result was",
     
@@ -79,17 +92,15 @@
 
 
 
-    "textPresetRandomizerNewType" : "[Creating a preset]\n\nType in the events you wish to use. Input x to stop adding items.\n",
+    "textPresetRandomizerNewType" : "Type in the events you wish to use. Input x to stop adding items.",
     
-    "textPresetDiceNewType"       : "[Creating a preset]\n\nType in the dice you wish to roll. Input x to stop adding items.\n",
+    "textPresetDiceNewType"       : "Type in the dice you wish to roll. Input x to stop adding items.",
 
-    "textPresetDiceLoadNote"      : "[Loading a preset]\n\nNote: when you load a preset, the program will automatically roll the dice for you.\n",
+    "textPresetDiceLoadNote"      : "[Loading a preset]\n\nNote: when you load a preset, the program will automatically\nroll the dice for you.\n",
     "textPresetDiceLoadStart"     : "Rolling dice...",
     "textPresetDiceLoadTotal"     : "Total",
 
-    
-
-    "textPresetRandomizerLoadNote" : "[Loading a preset]\n\nNote: when you load a preset, the Randomizer will automatically run for you.\n",
+    "textPresetRandomizerLoadNote" : "[Loading a preset]\n\nNote: when you load a preset, the Randomizer will automatically\nrun for you.\n",
 
 
 
