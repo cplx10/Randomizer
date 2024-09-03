@@ -1,25 +1,7 @@
-# Randomizer v2.0.0/xx Aug 2024 | Made by cplx; 11 Dec 2021.
-#
-# [~ INFORMATION REGARDING SCRIPT ~]
-#
-# In short, what this program does depends on the functionality you choose:
-# ~ 1. the Randomizer picks a random event from a list you input and returns it;
-# ~ 2. Roll a Die! rolls a die, like a d6 or a d20;
-#
-# The program features a translation feature making use of dictionaries that
-# imports the variables in the chosen language. All functions besides Lang()
-# take in the dictionary, stored in the messages_response variable, as arguments.
-# 
-# I plan on using JSON dictionaries in the future to clean up code and reduce
-# the file's size. Furthermore, adding "save states" would be very interesting
-# to make choosing random events from a permanent list easier and simpler, the
-# same applies to Roll a Die!
-# 
-# Either way, I really hope you enjoy!
-# 
-# ~ cplx
+# Randomizer v2.0.0/** Sep 2024 | Made by cplx; 11 Dec 2021.
 
 from time import sleep
+from copy import deepcopy
 from json import dump as jdump, load as jload
 from inquirer import list_input
 from random import choice as rchoice
@@ -44,6 +26,7 @@ def clearcmd(): # clear terminal
 class Languages(Enum): # setting up english and portuguese texts in a dictionary
     EN = auto()
     PT = auto()
+    ES = auto()
 
 #
 
@@ -53,11 +36,15 @@ class Main:
         message_response = {}
         match language:
             case Languages.EN:
-                with open('data/languages/english.json') as f:
+                with open('data/languages/english.json', encoding='utf-8') as f:
                     message_response = jload(f)
 
             case Languages.PT:
-                with open('data/languages/portuguese.json') as f:
+                with open('data/languages/portuguese.json', encoding='utf-8') as f:
+                    message_response = jload(f)
+
+            case Languages.ES:
+                with open('data/languages/spanish.json', encoding='utf-8') as f:
                     message_response = jload(f)
         
         return message_response
@@ -71,16 +58,17 @@ class Main:
 
             # selection menu
             language = list_input('Choose a language',
-                                choices=[('English', Languages.EN), ('Português', Languages.PT)],
+                                choices=[('English', Languages.EN), ('Português', Languages.PT),
+                                         ('Español', Languages.ES)],
                                 )
             
             # adopts chosen language
             message_response = Main.set_language(language)
-            Main.Menu(message_response, language)
+            Main.Menu(message_response)
 
     #
 
-    def Menu(message_response, language): # the main menu
+    def Menu(message_response): # the main menu
 
         # importing variables: main messages
         textMenuWelcome  = message_response.get("textMenuWelcome")
@@ -107,23 +95,23 @@ class Main:
             print(textMenuWelcome+version+'!\n')
 
             start = list_input(genericChooseAction,
-                            choices=[(textMenuOptionRandomizer, '1'), (textMenuOptionDice, '2'), (textMenuOptionNew, '3'),(genericMenuManagePreset, '4'),
+                            choices=[(textMenuOptionRandomizer, '1'), (textMenuOptionDice, '2'), (genericMenuManagePreset, '3'), (textMenuOptionNew, 'new'),
                                         (textMenuOptionAbout, 'a'), (textMenuOptionLanguage, 'l'), (genericChooseExit, 'x')],
                             )
 
             match start:
-                case '1': Randomizer.Main(message_response)      # run the Randomizer
-                case '2': Main.DiceMenu(message_response)        # run Roll a Die!
-                case '3':                                        # what's new in the program
+                case '1': Randomizer.Main(message_response)       # run the Randomizer
+                case '2': Main.DiceMenu(message_response)         # open the Roll a Die! main menu
+                case '3':                                         # manage Randomizer presets
+                    Randomizer.PresetRandomizer(message_response)
+                case 'new':                                       # what's new in the program
                     clearcmd(), print(textMenuNew)
                     getpass(genericEnterBack)
-                case '4':
-                    Randomizer.PresetRandomizer(message_response)
-                case 'a':                                        # about the program
+                case 'a':                                         # about the program
                     clearcmd(), print(textMenuAbout)
                     getpass(genericEnterBack)
-                case 'l': break                                  # switch languages
-                case 'x': Main.choiceContinue(message_response)  # exit
+                case 'l': break                                   # switch languages
+                case 'x': Main.choiceContinue(message_response)   # exit
     
     #
     
@@ -292,7 +280,11 @@ class Randomizer:
     
     #
 
-    def PresetRandomizer(message_response):
+    def PresetRandomizer(message_response): # manage Randomizer presets
+        
+        # importing variables: header
+        headerPreset = message_response.get("headerPreset")
+
         # importing variables: generics
         genericChooseAction = message_response.get("genericChooseAction")
         genericChooseReturn = message_response.get("genericChooseReturn")
@@ -305,6 +297,7 @@ class Randomizer:
 
         clearcmd()
 
+        print(headerPreset)
         presets = PresetActions()
 
         savechoice = list_input(genericChooseAction,
@@ -315,7 +308,10 @@ class Randomizer:
          
         match savechoice:
 
-            case 'create': # create a new dice preset
+            case 'create': # create a new rand preset
+
+                # importing variables: header
+                headerPresetNew = message_response.get("headerPresetNew")
 
                 # importing variables: error messages
                 errorInvalidInput      = message_response.get("errorInvalidInput")
@@ -328,7 +324,7 @@ class Randomizer:
                 preset_rand = []
 
                 clearcmd()
-                print(textPresetRandomizerNewType)
+                print(f'{headerPresetNew}\n{textPresetRandomizerNewType}')
                     
                 while True:
 
@@ -350,20 +346,20 @@ class Randomizer:
                 
                 presets.CreatePreset(message_response, 'rand', preset_name, preset_rand)
             
-            case 'load': # load a dice preset
+            case 'load': # load a rand preset
 
                 presets.LoadRandomizerPreset(message_response)
 
-            case 'edit': # edit a dice preset
+            case 'edit': # edit a rand preset
                 
-                print('Work in progress!')
-                None
+                presets.EditPreset(message_response, 'rand')
             
-            case 'delete': # delete a dice preset
+            case 'delete': # delete a rand preset
+
                 presets.DeletePreset(message_response, 'rand')
             
             case 'x': return
-        
+
         presets.UpdatePresets() # update preset list
 
 #
@@ -395,12 +391,16 @@ class RollDice:
             except ValueError:
                 print(errorInvalidInput, '\n'), sleep(1.5)
                 continue
+                
+            except OverflowError as over:
+                print(f'{errorInvalidInput} {over}'), sleep(1.5)
+                continue
 
             except Exception as e:
                 print(f'{errorUnknown}{e}\n'), sleep(1.5)
                 continue
 
-
+            
 
             if not dice or dice <= 1: # in case user doesn't input any numbers, or if its less than 1
                 print(errorInvalidInput,'\n'), sleep(1.5)
@@ -447,8 +447,11 @@ class RollDice:
 
     # 
 
-    def PresetDice(message_response): # options about presets, namely create, load, edit and delete presets
+    def PresetDice(message_response): # manage Roll a Die! presets
         
+        # importing variables: header
+        headerPreset = message_response.get("headerPreset")
+
         # importing variables: generics
         genericChooseAction = message_response.get("genericChooseAction")
         genericChooseReturn = message_response.get("genericChooseReturn")
@@ -460,6 +463,8 @@ class RollDice:
         genericPresetOptionDelete = message_response.get("genericPresetOptionDelete")
 
         clearcmd()
+
+        print(headerPreset)
 
         presets = PresetActions()
 
@@ -473,6 +478,9 @@ class RollDice:
 
             case 'create': # create a new dice preset
 
+                # importing variables: header
+                headerPresetNew = message_response.get("headerPresetNew")
+
                 # importing variables: error messages
                 errorInvalidInput = message_response.get("errorInvalidInput")
                 errorUnknown      = message_response.get("errorUnknown")
@@ -483,33 +491,39 @@ class RollDice:
 
                 preset_dice = []
 
-                clearcmd()
-                print(textPresetDiceNewType)
-
                 while True:
+                    clearcmd()
+                    print(f'{headerPresetNew}\n{textPresetDiceNewType}')
+
+                    while True:
+                        
+                        input_dice = input(' > d')
+                        if input_dice == 'x': break
+
+                        try:
+                            input_dice = int(input_dice)
+                        except ValueError:
+                            print(errorInvalidInput, '\n'), sleep(1.5)
+                            continue
+
+                        except Exception as e:
+                            print(f'{errorUnknown}{e}\n'), sleep(1.5)
+                            continue
+
+
+
+                        if not input_dice or input_dice <= 1: # in case the user doesn't input any numbers, or if it's less than 1
+                            print(errorInvalidInput,'\n'), sleep(1.5)
+                            continue
+
+                        preset_dice.append(input_dice)
                     
-                    input_dice = input(' > d')
-                    if input_dice == 'x': break
-
-                    try:
-                        input_dice = int(input_dice)
-                    except ValueError:
-                        print(errorInvalidInput, '\n'), sleep(1.5)
-                        continue
-
-                    except Exception as e:
-                        print(f'{errorUnknown}{e}\n'), sleep(1.5)
-                        continue
-
-
-
-                    if not input_dice or input_dice <= 1: # in case the user doesn't input any numbers, or if it's less than 1
+                    if not preset_dice:
                         print(errorInvalidInput,'\n'), sleep(1.5)
                         continue
-
-                    preset_dice.append(input_dice)
-                
-                preset_name = input(genericPresetNewName)
+                    
+                    preset_name = input(genericPresetNewName)
+                    break
                 
                 presets.CreatePreset(message_response, 'dice', preset_name, preset_dice)
             
@@ -519,8 +533,7 @@ class RollDice:
 
             case 'edit': # edit a dice preset
                 
-                print('Work in progress!')
-                None
+                presets.EditPreset(message_response, 'dice')
             
             case 'delete': # delete a dice preset
                 presets.DeletePreset(message_response, 'dice')
@@ -533,7 +546,7 @@ class RollDice:
 
 class PresetActions:
 
-    def __init__(self):
+    def __init__(self): # opens the preset list
         
         self.presets = []
 
@@ -570,7 +583,7 @@ class PresetActions:
 
     #
 
-    def LoadDicePreset(self, message_response): # loads a dice preset, as there are specifics differing from Randomizer presets
+    def LoadDicePreset(self, message_response): # loads a Roll a Die! preset
         
         # importing variables
         textPresetDiceLoadNote = message_response.get("textPresetDiceLoadNote")
@@ -579,23 +592,10 @@ class PresetActions:
         clearcmd()
         
         print(textPresetDiceLoadNote)
-        preset_list = []
-        preset_name_lst = set()
+        choose_preset_item = PresetActions.GetPresetNameList(self.presets, 'dice', genericChoosePreset)
 
         for block in self.presets:
-            if block[0] == 'dice':
-                preset_list.append(block)
-        
-        for block in preset_list:
-            preset_name_lst.add(block[1])
-        
-        preset_name_lst = list(preset_name_lst)
-        preset_name_lst.sort()
-
-        choose_preset_name = list_input(genericChoosePreset, choices=preset_name_lst)
-
-        for block in self.presets:
-            if block[1] == choose_preset_name:
+            if block[1] == choose_preset_item:
                 PresetActions.RollDicePreset(message_response, block[2])
                 return
     
@@ -647,9 +647,7 @@ class PresetActions:
 
     #
 
-    def LoadRandomizerPreset(self, message_response):
-        
-        print('Work in progress!')
+    def LoadRandomizerPreset(self, message_response): # loads a Randomizer preset
 
         # importing variables
         textPresetRandomizerLoadNote = message_response.get("textPresetRandomizerLoadNote")
@@ -658,23 +656,10 @@ class PresetActions:
         clearcmd()
         
         print(textPresetRandomizerLoadNote)
-        preset_list = []
-        preset_name_lst = set()
+        choose_preset_item = PresetActions.GetPresetNameList(self.presets, 'rand', genericChoosePreset)
 
         for block in self.presets:
-            if block[0] == 'rand':
-                preset_list.append(block)
-        
-        for block in preset_list:
-            preset_name_lst.add(block[1])
-        
-        preset_name_lst = list(preset_name_lst)
-        preset_name_lst.sort()
-
-        choose_preset_name = list_input(genericChoosePreset, choices=preset_name_lst)
-
-        for block in self.presets:
-            if block[1] == choose_preset_name:
+            if block[1] == choose_preset_item:
                 presets = block[2]
             
         PresetActions.RunRandomizerPreset(message_response, presets)
@@ -682,7 +667,7 @@ class PresetActions:
 
     #
 
-    def RunRandomizerPreset(message_response, Events):
+    def RunRandomizerPreset(message_response, Events): # runs the events from the preset
 
         # importing variables: header and information texts
         headerRandomizer            = message_response.get("headerRandomizer")
@@ -716,14 +701,16 @@ class PresetActions:
             
             rerun = list_input(genericChooseAction,
                                choices=[(f'{textRandomizerOptionRerun1}{len(temp_events)}{textRandomizerOptionRerun2}', '1'),
-                                        (genericChooseReturn, '3'), (genericChooseExit, 'x')],
+                                        (genericChooseReturn, '2'), (genericChooseExit, 'x')],
                               )
             
             match rerun:
-                case '1':                         # re-runs
+                case '1':                                 # re-runs
                     print(' #---#---#---#---#\n')
                     continue
-                case '3': return                  # retuns to menu
+                case '2': return                          # retuns to menu
+                case 'x':                                 # exits
+                    Main.choiceContinue(message_response)
 
         # action once there's only one event left
         evleft = str(temp_events).translate(str.maketrans('', '', "[']"))
@@ -734,11 +721,134 @@ class PresetActions:
 
     #
 
-    def EditPreset(self, message_response, type):
+    def EditPreset(self, message_response, type): # edits a preset
 
-        print('Work in progress!')
+        # importing variables: header & main messages
+        headerPresetEdit    = message_response.get("headerPresetEdit")
+        genericChoosePreset = message_response.get("genericChoosePreset")
 
+        clearcmd()
+        print(headerPresetEdit)
+
+        choose_preset_item = PresetActions.GetPresetNameList(self.presets, type, genericChoosePreset)
+
+        for block in self.presets:
+            if block[1] == choose_preset_item:
+                temp = PresetActions.EditOperations(message_response, type, block)
+        
+        self.presets = [temp if temp[1] == block[1] else block for block in self.presets]        
         return
+    
+    #
+
+    def EditOperations(message_response, type, info): # editing operations
+
+        # importing variables: main message
+        headerPresetEdit    = message_response.get("headerPresetEdit")
+        genericChooseAction = message_response.get("genericChooseAction")
+
+        # importing variables: errors
+        errorInvalidInput = message_response.get("errorInvalidInput")
+        errorUnknown      = message_response.get("errorUnknown")
+
+        # importing variables: list_input #1 options
+        genericPresetEditOptionAdd     = message_response.get("genericPresetEditOptionAdd")
+        genericPresetEditOptionRemove  = message_response.get("genericPresetEditOptionRemove")
+        genericPresetEditOptionConfirm = message_response.get("genericPresetEditOptionConfirm")
+        genericPresetEditOptionCancel  = message_response.get("genericPresetEditOptionCancel")
+
+        # importing variables: choose an item to remove
+        genericPresetEditChooseRemove = message_response.get("genericPresetEditChooseRemove")
+
+        # importing variables: text prompts
+        genericPresetEditTextConfirm = message_response.get("genericPresetEditTextConfirm")
+        textPresetRandomizerNewType  = message_response.get("textPresetRandomizerNewType")
+        textPresetDiceNewType        = message_response.get("textPresetDiceNewType")
+
+        # importing variables: final messages
+        genericPresetDeleteFinish = message_response.get("genericPresetDeleteFinish")
+        genericPresetCancel       = message_response.get("genericPresetCancel")
+
+        temp_info = deepcopy(info)
+
+        while True:
+            clearcmd()
+
+            print(f'{headerPresetEdit}\n #-> {temp_info[1]} <-#\n')
+            
+            for item in temp_info[2]:
+                print(f' > {item}')
+            
+            print('')
+            
+            choose_action = list_input(genericChooseAction,
+                                       choices=[(genericPresetEditOptionAdd,'add'), (genericPresetEditOptionRemove, 'remove'),
+                                                (genericPresetEditOptionConfirm, 'confirm'), (genericPresetEditOptionCancel, 'cancel')]
+                                      )
+            
+            match choose_action:
+                case 'add': # adds a new item to the list
+
+                    # rand
+                    if type == 'rand':
+
+                        print(textPresetRandomizerNewType)
+
+                        while True: # events input
+                            choiceEvent = input(f' > ').strip()
+
+                            if not choiceEvent: print(errorInvalidInput) # if choiceEvent has no content
+                            elif choiceEvent == 'x': break               # if choiceEvent is 'x'
+                            else:
+                                temp_info[2].append(choiceEvent)         # adds event to Events list
+
+                    # dice
+                    if type == 'dice':
+                        
+                        print(textPresetDiceNewType)
+
+                        while True:
+                            
+                            input_dice = input(' > d')
+                            if input_dice == 'x': break
+
+                            try:
+                                input_dice = int(input_dice)
+                            except ValueError:
+                                print(errorInvalidInput, '\n'), sleep(1.5)
+                                continue
+
+                            except Exception as e:
+                                print(f'{errorUnknown}{e}\n'), sleep(1.5)
+                                continue
+
+                            if not input_dice or input_dice <= 1: # in case the user doesn't input any numbers, or if it's less than 1
+                                print(errorInvalidInput,'\n'), sleep(1.5)
+                                continue
+
+                            temp_info[2].append(input_dice)
+                
+                case 'remove': # deletes an item
+
+                    remove_check = list_input(genericPresetEditChooseRemove,
+                                              choices=temp_info[2]
+                                             )
+
+                    for item in temp_info[2]:
+                        if item == remove_check:
+                            temp_info[2].remove(item)
+                    
+                    print(genericPresetDeleteFinish)
+                
+                case 'confirm': # commits changes and exits
+                    
+                    print(genericPresetEditTextConfirm), sleep(2)
+                    return temp_info
+
+                case 'cancel': # cancels, reverses changes and exits
+
+                    print(genericPresetCancel), sleep(2)
+                    return info
 
     #
 
@@ -749,7 +859,7 @@ class PresetActions:
         genericChoosePreset       = message_response.get("genericChoosePreset")
         genericPresetDeleteCheck  = message_response.get("genericPresetDeleteCheck")
         genericPresetDeleteFinish = message_response.get("genericPresetDeleteFinish")
-        genericPresetDeleteCancel = message_response.get("genericPresetDeleteCancel")
+        genericPresetCancel       = message_response.get("genericPresetCancel")
 
         genericYes = message_response.get("genericYes")
         genericNo  = message_response.get("genericNo")
@@ -758,20 +868,7 @@ class PresetActions:
 
         print(headerPresetDelete)
 
-        preset_list = []
-        preset_name_lst = set()
-
-        for block in self.presets:
-            if block[0] == type:
-                preset_list.append(block)
-        
-        for block in preset_list:
-            preset_name_lst.add(block[1])
-        
-        preset_name_lst = list(preset_name_lst)
-        preset_name_lst.sort()
-
-        choose_preset_item = list_input(genericChoosePreset, choices=preset_name_lst) # user chooses the preset to delete
+        choose_preset_item = PresetActions.GetPresetNameList(self.presets, type, genericChoosePreset)
 
         confirm = list_input(genericPresetDeleteCheck, choices=((genericYes, 'y'), genericNo))
 
@@ -784,7 +881,7 @@ class PresetActions:
             print('...'), sleep(.5)
             print(genericPresetDeleteFinish) # item deleted
         else:
-            print(genericPresetDeleteCancel) # operation cancelled
+            print(genericPresetCancel) # operation cancelled
 
         sleep(2)
     
@@ -803,8 +900,29 @@ class PresetActions:
 
             new_presets.append(preset_list)
         
-        with open('data/presets.json', 'w') as file:
+        with open('data/presets.json', 'w', encoding='utf-8') as file:
             jdump(new_presets, file, indent=4)
+    
+    #
+
+    def GetPresetNameList(presets, type, genericChoosePreset): # gets the list of names
+
+        preset_list = []
+        preset_name_lst = set()
+
+        for block in presets:
+            if block[0] == type:
+                preset_list.append(block)
+        
+        for block in preset_list:
+            preset_name_lst.add(block[1])
+        
+        preset_name_lst = list(preset_name_lst)
+        preset_name_lst.sort()
+
+        choose_preset_item = list_input(genericChoosePreset, choices=preset_name_lst) # user chooses a preset
+
+        return choose_preset_item
         
 # loads the language selection menu
 Main.Lang()
