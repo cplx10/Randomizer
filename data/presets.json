@@ -16,11 +16,20 @@
     },
     {
         "type": "rand",
-        "name": "Random generic texts",
+        "name": "Generic texts",
         "info": [
-            "The quick brown fox jumps over the lazy dog",
-            "Lorem ipsum dolor sit amet",
+            "Lorem ipsum",
+            "The quick brown fox",
             "This is an example"
+        ]
+    },
+    {
+        "type": "dice",
+        "name": "Hardcore",
+        "info": [
+            20,
+            100,
+            50
         ]
     }
 ]
