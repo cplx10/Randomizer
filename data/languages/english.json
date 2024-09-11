@@ -27,6 +27,7 @@
 
     "genericMenuManagePreset"        : "Manage presets",
 
+    "genericPresetMenuExplain"       : "\nPresets are a new way for you to save and load your own configurations!\nThat way, you won't need to type each and every single list over and over\nagain. Less time typing, more time randomizing!\n",
     "genericPresetCancel"            : "Operation cancelled.",
     
     "genericPresetOptionNew"         : "Create a new preset",
@@ -65,16 +66,17 @@
 
 
 
-    "textRandomizerAttention"     : "\nATTENTION!\nEnter 'x' below to stop the program.\n---",
-    "textRandomizerEvent"         : "Event",
+    "textRandomizerAttention"       : "\nSimply input as many events as you'd like and the program will\npick a random one for you!\n\nEnter 'x' below to stop adding events and run the Randomizer.\n---",
+    "textRandomizerEvent"           : "Event",
 
-    "textRandomizerEventsChosen"  : "The chosen event is",
-    "textRandomizerEventsLeft"    : "Your events left",
-    "textRandomizerEventsWarning" : "You only have one event left!",
+    "textRandomizerEventsChosen"    : "The chosen event is",
+    "textRandomizerEventsLeft"      : "Your events left",
+    "textRandomizerEventsWarning"   : "You only have one event left!",
 
-    "textRandomizerOptionRerun1"  : "Re-run with the events left (you have ",
-    "textRandomizerOptionRerun2"  : " left!)",
-    "textRandomizerOptionInsert"  : "Insert new events",
+    "textRandomizerOptionRerunSame" : "Re-run with the same events",
+    "textRandomizerOptionRerun1"    : "Re-run with the events left (you have ",
+    "textRandomizerOptionRerun2"    : " left!)",
+    "textRandomizerOptionInsert"    : "Insert new events",
 
 
 
