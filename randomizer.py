@@ -230,15 +230,28 @@ class Randomizer:
         genericChooseReturn = message_response.get("genericChooseReturn")
 
         # importing variables: list_inputs
-        textRandomizerOptionRerun1  = message_response.get("textRandomizerOptionRerun1")
-        textRandomizerOptionRerun2  = message_response.get("textRandomizerOptionRerun2")
-        textRandomizerOptionInsert  = message_response.get("textRandomizerOptionInsert")
+        textRandomizerOptionRerunSame = message_response.get("textRandomizerOptionRerunSame")
+        textRandomizerOptionRerun1    = message_response.get("textRandomizerOptionRerun1")
+        textRandomizerOptionRerun2    = message_response.get("textRandomizerOptionRerun2")
+        textRandomizerOptionInsert    = message_response.get("textRandomizerOptionInsert")
+
+        # importing variables: errors
+        errorUnknown = message_response.get("errorUnknown")
 
         print(headerRandomizer)
 
-        while len(Events) > 1:                                           # events available + event picked + events left
-            result = str(rchoice(Events)).strip("[']")                   # picks a random event and formats to remove [] and ''
-            Events.remove(result)
+        resame = True # re-run without removing the chosen item
+
+        while len(Events) > 1:                         # events available + event picked + events left
+            result = str(rchoice(Events)).strip("[']") # picks a random event and formats to remove [] and ''
+
+            if resame == False:
+                try: Events.remove(result)
+
+                except Exception:
+                    print(errorUnknown)
+                    continue
+
             evleft = str(Events).translate(str.maketrans('', '', "[']")) # formats events list to remove [] and ''
 
             print(f'{textRandomizerEventsChosen}: {result}.\n{textRandomizerEventsLeft}: {evleft}.\n') # The chosen event is: {result}. Your events left: {evleft}.
@@ -247,17 +260,23 @@ class Randomizer:
                 break
             
             rerun = list_input(genericChooseAction,
-                               choices=[(f'{textRandomizerOptionRerun1}{len(Events)}{textRandomizerOptionRerun2}', '1'),
-                                        (textRandomizerOptionInsert, '2'), (genericChooseReturn, '3'), (genericChooseExit, 'x')],
+                               choices=[(textRandomizerOptionRerunSame, '1'),
+                                        (f'{textRandomizerOptionRerun1}{len(Events)}{textRandomizerOptionRerun2}', '2'),
+                                        (textRandomizerOptionInsert, '3'), (genericChooseReturn, '4'), (genericChooseExit, 'x')],
                               )
             
             match rerun:
-                case '1':                                       # re-runs
+                case '1':                                 # re-runs with the same events
+                    resame = True
                     print(' #---#---#---#---#\n')
                     continue
-                case '2': return True                           # inputs new events
-                case '3': return False                          # retuns to menu
-                case 'x':                                       # exits
+                case '2':                                 # re-runs removing events
+                    resame = False
+                    print(' #---#---#---#---#\n')
+                    continue
+                case '3': return True                     # inputs new events
+                case '4': return False                    # retuns to menu
+                case 'x':                                 # exits
                     Main.choiceContinue(message_response)
                     return False
 
@@ -272,9 +291,9 @@ class Randomizer:
                                 )
             
         match choiceEvent:
-            case '1': return True                           # inputs new events
-            case '2': return False                          # returns to menu
-            case 'x':                                       # exits
+            case '1': return True                     # inputs new events
+            case '2': return False                    # returns to menu
+            case 'x':                                 # exits
                 Main.choiceContinue(message_response)
                 return False
     
@@ -289,6 +308,9 @@ class Randomizer:
         genericChooseAction = message_response.get("genericChooseAction")
         genericChooseReturn = message_response.get("genericChooseReturn")
 
+        # importing variables: message
+        genericPresetMenuExplain = message_response.get("genericPresetMenuExplain")
+
         # importing variables: list_input options
         genericPresetOptionNew    = message_response.get("genericPresetOptionNew")
         genericPresetOptionLoad   = message_response.get("genericPresetOptionLoad")
@@ -297,7 +319,7 @@ class Randomizer:
 
         clearcmd()
 
-        print(headerPreset)
+        print(headerPreset, genericPresetMenuExplain)
         presets = PresetActions()
 
         savechoice = list_input(genericChooseAction,
@@ -391,10 +413,6 @@ class RollDice:
             except ValueError:
                 print(errorInvalidInput, '\n'), sleep(1.5)
                 continue
-                
-            except OverflowError as over:
-                print(f'{errorInvalidInput} {over}'), sleep(1.5)
-                continue
 
             except Exception as e:
                 print(f'{errorUnknown}{e}\n'), sleep(1.5)
@@ -406,11 +424,11 @@ class RollDice:
                 print(errorInvalidInput,'\n'), sleep(1.5)
                 continue
 
-            repeat = RollDice.Roll(message_response, headerDice, dice)
+            repeat = RollDice.Roll(message_response, headerDice, dice, errorInvalidInput)
 
     #
     
-    def Roll(message_response, headerDice, dice): # (re)rolls the die
+    def Roll(message_response, headerDice, dice, errorInvalidInput): # (re)rolls the die
         
         # importing variables: text information
         textDiceRoll       = message_response.get("textDiceRoll")
@@ -427,9 +445,13 @@ class RollDice:
 
         while True:
 
-            clearcmd()
-            result = str(rchoice(range(1,(dice+1)))) # picks a random number between 1 and the one you chose and transforms it into a string
+            try:
+                result = str(rchoice(range(1,(dice+1)))) # picks a random number between 1 and the one you chose and transforms it into a string
+            except OverflowError as over:
+                print(f'{errorInvalidInput} {over}'), sleep(1.5)
+                return True
 
+            clearcmd()
             print(f'{headerDice}\n{textDiceRoll}{dice}.\n{textDiceRollResult}: {result}.\n') # You rolled a d{dice}. Your result was: {result}.
             
             # selection menu
@@ -456,6 +478,9 @@ class RollDice:
         genericChooseAction = message_response.get("genericChooseAction")
         genericChooseReturn = message_response.get("genericChooseReturn")
 
+        # importing variables: menu message
+        genericPresetMenuExplain = message_response.get("genericPresetMenuExplain")
+
         # importing variables: list_input options
         genericPresetOptionNew    = message_response.get("genericPresetOptionNew")
         genericPresetOptionLoad   = message_response.get("genericPresetOptionLoad")
@@ -464,7 +489,7 @@ class RollDice:
 
         clearcmd()
 
-        print(headerPreset)
+        print(headerPreset, genericPresetMenuExplain)
 
         presets = PresetActions()
 
@@ -624,6 +649,7 @@ class PresetActions:
             sleep(1)
 
             dice_sum = 0
+            full_sum = 0
 
             for die in dice:
                 sleep(1)
@@ -631,10 +657,11 @@ class PresetActions:
                 result = str(rchoice(range(1,(die+1)))) # picks a random number between 1 and the one you chose and transforms it into a string
                 print(f'{textDiceRoll}{die}.\n{textDiceRollResult}: {result}.\n') # You rolled a d{dice}. Your result was: {result}.
 
+                full_sum += die
                 dice_sum += int(result)
 
             sleep(0.5)
-            print(f' > {textPresetDiceLoadTotal}: {dice_sum}\n')
+            print(f' > {textPresetDiceLoadTotal}: {dice_sum}/{full_sum}\n')
             sleep(0.5)
 
             re = list_input(genericChooseAction,
@@ -682,16 +709,21 @@ class PresetActions:
         genericChooseReturn = message_response.get("genericChooseReturn")
 
         # importing variables: list_inputs
-        textRandomizerOptionRerun1  = message_response.get("textRandomizerOptionRerun1")
-        textRandomizerOptionRerun2  = message_response.get("textRandomizerOptionRerun2")
+        textRandomizerOptionRerunSame = message_response.get("textRandomizerOptionRerunSame")
+        textRandomizerOptionRerun1    = message_response.get("textRandomizerOptionRerun1")
+        textRandomizerOptionRerun2    = message_response.get("textRandomizerOptionRerun2")
 
         clearcmd()
         temp_events = Events.copy()
         print(headerRandomizer)
+        resame = True
 
         while len(temp_events) > 1:                                           # events available + event picked + events left
             result = str(rchoice(temp_events)).strip("[']")                   # picks a random event and formats to remove [] and ''
-            temp_events.remove(result)
+            
+            if resame == False:
+                temp_events.remove(result)
+
             evleft = str(temp_events).translate(str.maketrans('', '', "[']")) # formats events list to remove [] and ''
 
             print(f'{textRandomizerEventsChosen}: {result}.\n{textRandomizerEventsLeft}: {evleft}.\n') # The chosen event is: {result}. Your events left: {evleft}.
@@ -700,15 +732,21 @@ class PresetActions:
                 break
             
             rerun = list_input(genericChooseAction,
-                               choices=[(f'{textRandomizerOptionRerun1}{len(temp_events)}{textRandomizerOptionRerun2}', '1'),
-                                        (genericChooseReturn, '2'), (genericChooseExit, 'x')],
+                               choices=[(textRandomizerOptionRerunSame,'1'),
+                                        (f'{textRandomizerOptionRerun1}{len(temp_events)}{textRandomizerOptionRerun2}', '2'),
+                                        (genericChooseReturn, '3'), (genericChooseExit, 'x')],
                               )
             
             match rerun:
-                case '1':                                 # re-runs
+                case '1':
+                    resame = True
                     print(' #---#---#---#---#\n')
                     continue
-                case '2': return                          # retuns to menu
+                case '2':                                 # re-runs
+                    resame = False
+                    print(' #---#---#---#---#\n')
+                    continue
+                case '3': return                          # retuns to menu
                 case 'x':                                 # exits
                     Main.choiceContinue(message_response)
 
