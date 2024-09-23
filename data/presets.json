@@ -1,0 +1,35 @@
+[
+    {
+        "type": "dice",
+        "name": "All dice",
+        "info": [
+            2,
+            3,
+            4,
+            6,
+            8,
+            10,
+            12,
+            16,
+            20
+        ]
+    },
+    {
+        "type": "rand",
+        "name": "Generic texts",
+        "info": [
+            "Lorem ipsum",
+            "The quick brown fox",
+            "This is an example"
+        ]
+    },
+    {
+        "type": "dice",
+        "name": "Hardcore",
+        "info": [
+            20,
+            100,
+            50
+        ]
+    }
+]

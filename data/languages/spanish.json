@@ -1,0 +1,111 @@
+{
+
+    "headerRandomizer"   : "[El Randomizador]\n",
+    "headerDice"         : "[¡Tirando Dados!]\n",
+    "headerPreset"       : "[Gestionar un preajuste]\n",
+    "headerPresetNew"    : "[Crear un preajuste]\n",
+    "headerPresetEdit"   : "[Editar un preajuste]\n",
+    "headerPresetDelete" : "[Suprimir un preajuste]\n",
+
+
+
+    "errorRandomizerNoEvent" : "\n¡Debes insertar al menos 1 evento!\nPresione Enter para intentarlo de nuevo.",
+    "errorInvalidInput"      : "¡Error! ¡La entrada no es válida!",
+    "errorUnknown"           : "Error desconocido.",
+
+
+
+    "genericYes"                     : "Sí",
+    "genericNo"                      : "No",
+
+    "genericEnterBack"               : "Presione enter para volver.",
+
+    "genericChooseAction"            : "Elige una acción",
+    "genericChoosePreset"            : "Elige un un preajuste",
+    "genericChooseExit"              : "Salir del programa",
+    "genericChooseReturn"            : "Volver al menú",
+
+    "genericMenuManagePreset"        : "Gestionar un preajuste",
+
+    "genericPresetMenuExplain"       : "\nLos preajustes son una nueva forma de guardar y cargar sus propias configuraciones.\nDe esa manera, no necesitará escribir cada una de las listas una y otra vez.\n¡Menos tiempo escribiendo y más tiempo Randomizando!\n",
+    "genericPresetCancel"            : "Operación cancelada",
+    
+    "genericPresetOptionNew"         : "Crear un preajuste",
+    "genericPresetOptionLoad"        : "Cargar un preajuste",
+    "genericPresetOptionEdit"        : "Editar un preajuste",
+    "genericPresetOptionDelete"      : "Suprimir un preajuste",
+
+    "genericPresetNewCreate"         : "\nCreando preajuste...",
+    "genericPresetNewComplete"       : "\n¡preajuste creado!",
+
+    "genericPresetNewName"           : "\nIntroduzca un nombre para el preajuste\n > ",
+
+    "genericPresetEditOptionAdd"     : "Añadir nuevo elemento",
+    "genericPresetEditOptionRemove"  : "Eliminar un elemento",
+    "genericPresetEditOptionConfirm" : "Confirmar cambios y volver",
+    "genericPresetEditOptionCancel"  : "Cancelar y volver",
+
+    "genericPresetEditChooseRemove"  : "Eligir un elemento para eliminar",
+
+    "genericPresetEditTextConfirm"   : "¡Cambios guardados!",
+    
+    "genericPresetDeleteCheck"       : "¿Estás seguro de tu decisión? (Esto no se puede revertir)",
+    "genericPresetDeleteFinish"      : "Elemento suprimido.",
+
+
+
+    "textMenuWelcome"          : "Bienvenido al Randomizer v",
+    "textMenuNew"              : "Esto es lo nuevo en el Randomizer 2.0.0:\n\n- ¡Nuevo menú de selección de idioma (y nueva traducción)!\nAhora puedes cambiar fácilmente entre idiomas en el Randomizer sin tener que abrir\nmanualmente un ejecutable independiente. Además, el Randomizer 2.0 también incluye una\nnueva traducción al español.\n\n- ¡'Menú principal' ampliado!\nHemos ampliado la cantidad de opciones que puedes elegir en el 'menú principal' del\nprograma, lo que hace que el acceso a las nuevas funciones sea fácil y sencillo.\n\n- ¡Tirando dados!\nEn esta nueva versión, ¡Tiranso dados! es un tirador de dados integrado en el programa,\nque te hace la vida más fácil si quieres usarlo como una forma de tirar tu d20.\n\n- Preajustes!\nUna característica completamente nueva en esta versión son los preajustes. ¡Ahora puedes\nguardar una lista de eventos o dados para usar en cualquier momento! Puedes crear, cargar,\neditar y eliminar tantos preajustes como desees. ¡Vuélvete loco y diviértete!\n\n\n\n",
+    "textMenuAbout"            : "[SOBRE EL RANDOMIZER]\n\nEl Randomizer es un programa desarrollado por cplx en Python.\n\nSu uso inicial como programa para decidir eventos aleatorios surgió con los LARP de Starlight\nen el servidor comunitario de Discord llamado The Reservoir. Es su primer lanzamiento, la\nversión 1.0.0, se produjo el 11 de diciembre de 2021, y ha estado recibiendo nuevas\nactualizaciones desde febrero de 2024, cuando cplx lanzó la versión 1.2.0.\n\nPara obtener más información sobre el historial de actualizaciones y los registros de cambios,\nconsulte UPDATE_LOGS.txt en la carpeta de Randomizer.\n\n\n",
+
+    "textMenuOptionRandomizer" : "Iniciar el Randomizer",
+    "textMenuOptionDice"       : "¡Tirando Dados!",
+    "textMenuOptionNew"        : "¿Qué hay de nuevo?",
+    "textMenuOptionAbout"      : "Sobre el Randomizer",
+    "textMenuOptionLanguage"   : "Cambiar idiomas",
+
+
+
+    "textRandomizerAttention"        : "\n¡Simplemente ingrese tantos eventos como desee y\nel programa elegirá uno al azar para usted!\n\nIntroduzca 'x' abajo para dejar de agregar elementos.\n---",
+    "textRandomizerEvent"            : "Evento",
+
+    "textRandomizerEventsChosen"     : "El evento elegido es",
+    "textRandomizerEventsLeft"       : "Tus eventos quedan",
+    "textRandomizerEventsWarning"    : "¡Solo te queda un evento!",
+
+    "textRandomizerOptionRerunSame"  : "Vuelve a ejecutar con los mismos eventos",
+    "textRandomizerOptionRerun1"     : "Vuelve a ejecutar con los eventos restantes (te queda ",
+    "textRandomizerOptionRerun2"     : ")",
+    "textRandomizerOptionInsert"     : "Inserta nuevos eventos",
+
+
+
+    "textDiceMenuWelcome"      : "Bienvenido a ¡Tirando Dados!",
+
+    "textDiceMenuOptionRoll"   : "Tira un dado",
+    "textDiceMenuOptionReturn" : "Volver al Randomizer",
+
+    "textDiceRollType"         : "Escribe el dado que deseas tirar (por ejemplo, d20)\n > d",
+    "textDiceRoll"             : "Has tirado un d",
+    "textDiceRollResult"       : "Tu resultado fue",
+    
+    "textDiceOptionReroll"     : "Vuelve a tirar el dado",
+    "textDiceOptionAnother"    : "Tira un dado diferente",
+
+
+
+    "textPresetRandomizerNewType"  : "Escriba los eventos que desea utilizar. Escriba x para dejar de agregar elementos.",
+    
+    "textPresetDiceNewType"        : "Escribe los dados que deseas tirar. Escriba x para dejar de añadir elementos.",
+
+    "textPresetDiceLoadNote"       : "[Cargando un preajuste]\n\nNota: cuando carga un ajuste preestablecido, el programa tirará\nlos dados automáticamente por usted.\n",
+    "textPresetDiceLoadStart"      : "Tirando dado...",
+    "textPresetDiceLoadTotal"      : "Total",
+
+    "textPresetRandomizerLoadNote" : "[Cargando un preajuste]\n\nNota: cuando carga un ajuste preestablecido, el aleatorizador\nse ejecutará automáticamente para usted.\n",
+
+
+
+    "textExitChoice"  : "¿Estás seguro de que deseas salir del programa?",
+    "textExitThank"   : "¡Gracias por usar el aleatorizador! Creado por cplx el 11 de diciembre de 2021.\nPresiona Enter para salir."
+}

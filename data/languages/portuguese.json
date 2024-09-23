@@ -1,0 +1,112 @@
+{
+
+    "headerRandomizer"   : "[O Randomizer]\n",
+    "headerDice"         : "[Rolando Dados!]\n",
+    "headerPreset"       : "[Gerenciando presets]\n",
+    "headerPresetNew"    : "[Criando um preset]\n",
+    "headerPresetEdit"   : "[Editando um preset]\n",
+    "headerPresetDelete" : "[Deletando um preset]\n",
+
+
+
+    "errorRandomizerNoEvent" : "\nVocê deve inserir pelo menos 1 evento!\nPressione enter para tentar novamente.",
+    "errorInvalidInput"      : "Erro! Input inválido!",
+    "errorUnknown"           : "Erro desconhecido.",
+
+
+
+    "genericYes"                     : "Sim",
+    "genericNo"                      : "Não",
+
+    "genericEnterBack"               : "Pressione enter para voltar.",
+
+    "genericChooseAction"            : "Escolha uma ação",
+    "genericChoosePreset"            : "Escolha um preset",
+    "genericChooseExit"              : "Sair do programa",
+    "genericChooseReturn"            : "Voltar ao menu",
+
+    "genericMenuManagePreset"        : "Gerenciar presets",
+
+    "genericPresetMenuExplain"       : "\nOs presets são um novo jeito de você salvar e carregar suas próprias configurações!\nAssim, você não precisa digitar cada lista de novo e de novo.\nMenos tempo digitando, mais tempo aleatorizando!\n",
+    "genericPresetCancel"            : "Operação cancelada.",
+    
+    "genericPresetOptionNew"         : "Criar um preset novo",
+    "genericPresetOptionLoad"        : "Carregar um preset",
+    "genericPresetOptionEdit"        : "Editar um preset",
+    "genericPresetOptionDelete"      : "Deletar um preset",
+
+    "genericPresetNewCreate"         : "\nCriando preset...",
+    "genericPresetNewComplete"       : "\nPreset criado!",
+
+    "genericPresetNewName"           : "\nDê um nome ao preset\n > ",
+
+    "genericPresetEditOptionAdd"     : "Adicionar um item",
+    "genericPresetEditOptionRemove"  : "Remover um item",
+    "genericPresetEditOptionConfirm" : "Confirmar mudanças e voltar",
+    "genericPresetEditOptionCancel"  : "Cancelar e voltar",
+
+    "genericPresetEditChooseRemove"  : "Escolha um item para remover",
+
+    "genericPresetEditTextConfirm"   : "Mudanças salvas!",
+    
+    "genericPresetDeleteCheck"       : "Você tem certeza da sua decisão? (Isso não é reversível)",
+    "genericPresetDeleteFinish"      : "Item deletado.",
+
+
+
+    "textMenuWelcome"          : "Bem-vindo ao Randomizer v",
+    "textMenuNew"              : "Aqui estão as novidades do Randomizer 2.0.0:\n\n- Novo menu de seleção de idioma (e uma nova tradução)!\nAgora você pode facilmente trocar o idioma do Randomizer sem ter que abrir um executável\nseparado! Ademais, o Randomizer 2.0.0 também conta com uma nova tradução para o Espanhol!\n\n- 'Menu principal' expandido!\nO número de escolhas no 'menu principal' do programa foi aumentado, deixando o acesso\na novas adições mais simples e fácil!\n\n- Rolando Dados!\nIntroduzido com essa versão, o Rolando Dados! é um rolador de dado imbutido no programa,\ndeixando sua vida mais fácil se você quiser rolar um d20.\n\n- Presets!\nUma nova funcionalidade do programa são os presets! Agora você pode salvar listas de\neventos ou dados para usar a qualquer momento! Você pode criar, carregar, editar e\ndeletar quantos presets você quiser. Divirta-se!\n\n\n\n",
+    "textMenuAbout"            : "[SOBRE O RANDOMIZER]\n\nO Randomizer é um programa desenvolvido por cplx em Python.\n\nSeu uso inicial como um programa para decidir eventos aleatórios originou-se\ncom os LARP's de Starlight no servidor de comunidade no Discord The Reservoir.\nSeu primeiro lançamento, a versão 1.0.0, veio em 11 de dezembro de 2021, e vem\nrecebendo atualizações novas desde Fevereiro de 2024, quando cplx lançou a\nversão 1.2.0.\n\nPara mais informações sobre atualizações e mudanças,\nveja UPDATE_LOGS.txt na pasta do Randomizer.\n\n\n",
+
+    "textMenuOptionRandomizer" : "Abrir o Randomizer",
+    "textMenuOptionDice"       : "Rolando Dados!",
+    "textMenuOptionNew"        : "Novidades",
+    "textMenuOptionAbout"      : "Sobre o Randomizer",
+    "textMenuOptionLanguage"   : "Trocar de idioma",
+
+
+
+    "textRandomizerAttention"       : "\nSimplesmente insira quantos eventos desejar e o program escolhe um\npara você!\n\nInsira 'x' abaixo para parar de adicionar itens.\n---",
+    "textRandomizerEvent"           : "Evento",
+
+    "textRandomizerEventsChosen"    : "O evento escolhido foi",
+    "textRandomizerEventsLeft"      : "Eventos restantes",
+    "textRandomizerEventsWarning"   : "Você só tem um evento restante!",
+
+    "textRandomizerOptionRerunSame" : "Re-rodar com os mesmos eventos",
+    "textRandomizerOptionRerun1"    : "Re-rodar com os eventos restantes (você tem ",
+    "textRandomizerOptionRerun2"    : " restando!)",
+    "textRandomizerOptionInsert"    : "Inserir novos eventos",
+
+
+
+    "textDiceMenuWelcome"      : "Bem-vindo ao Rolando Dados!",
+
+    "textDiceMenuOptionRoll"   : "Rolar um dado",
+    "textDiceMenuOptionReturn" : "Voltar ao Randomizer",
+
+    "textDiceRollType"         : "Digite o dado que você deseja rolar (ex. d20)\n > d",
+    "textDiceRoll"             : "Você rolou um d",
+    "textDiceRollResult"       : "Seu resultado foi",
+    
+    "textDiceOptionReroll"     : "Rerolar o dado",
+    "textDiceOptionAnother"    : "Rolar outro dado",
+
+
+
+    "textPresetRandomizerNewType" : "Digite os eventos que você deseja usar. Insira x para parar de adicionar itens.",
+    
+    "textPresetDiceNewType"       : "Digite os dados que você deseja rolar. Insira x para parar de adicionar itens.",
+
+    "textPresetDiceLoadNote"      : "[Carregando um preset]\n\nNota: quando você carrega um preset, o programa irá rolar os dados\npara você automaticamente.\n",
+    "textPresetDiceLoadStart"     : "Rolando dados...",
+    "textPresetDiceLoadTotal"     : "Total",
+
+    "textPresetRandomizerLoadNote" : "[Carregando um preset]\n\nNota: quando você carrega um preset, o Randomizer irá rodar\npara você automaticamente.\n",
+
+
+
+    "textExitChoice"  : "Você realmente quer fechar o programa?",
+    "textExitThank"   : "Obrigado por usar o Randomizer! Feito por cplx desde 11 de dezembro de 2021.\nPressione enter para sair."
+
+}
