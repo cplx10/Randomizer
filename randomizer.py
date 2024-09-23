@@ -1,4 +1,4 @@
-# Randomizer v2.0.0/** Sep 2024 | Made by cplx; 11 Dec 2021.
+# Randomizer v2.0.0/23 Sep 2024 | Made by cplx; 11 Dec 2021.
 
 from time import sleep
 from copy import deepcopy
