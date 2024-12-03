@@ -15,7 +15,7 @@ Since early 2024 the program has been getting translations to other languages, n
 Introduced with version 2.0 was also a brand-new feature called **presets**, which allows the user to save, load, edit and delete set lists of dice or Randomizer events saved locally in their computer.
 
 ## Credits
-**The Randomizer 2.0.0 by cplx, 23 September, 2024.** Developed since 11 December, 2021.
+**The Randomizer 2.0.1 by cplx, 03 December, 2024.** Developed since 11 December, 2021.
 
 Translations:
 - Portuguese translation by **cplx**;
