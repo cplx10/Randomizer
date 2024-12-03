@@ -70,12 +70,12 @@
     "textRandomizerEvent"           : "Evento",
 
     "textRandomizerEventsChosen"    : "O evento escolhido foi",
-    "textRandomizerEventsLeft"      : "Eventos restantes",
+    "textRandomizerEventsList"      : "Sua lista de eventos",
     "textRandomizerEventsWarning"   : "Você só tem um evento restante!",
 
     "textRandomizerOptionRerunSame" : "Re-rodar com os mesmos eventos",
-    "textRandomizerOptionRerun1"    : "Re-rodar com os eventos restantes (você tem ",
-    "textRandomizerOptionRerun2"    : " restando!)",
+    "textRandomizerOptionRerun1"    : "Deletar este item e re-rodar (você terá ",
+    "textRandomizerOptionRerun2"    : " eventos restando!)",
     "textRandomizerOptionInsert"    : "Inserir novos eventos",
 
 

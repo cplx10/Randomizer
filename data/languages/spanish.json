@@ -70,12 +70,12 @@
     "textRandomizerEvent"            : "Evento",
 
     "textRandomizerEventsChosen"     : "El evento elegido es",
-    "textRandomizerEventsLeft"       : "Tus eventos quedan",
+    "textRandomizerEventsList"       : "Tu lista de eventos",
     "textRandomizerEventsWarning"    : "¡Solo te queda un evento!",
 
     "textRandomizerOptionRerunSame"  : "Vuelve a ejecutar con los mismos eventos",
-    "textRandomizerOptionRerun1"     : "Vuelve a ejecutar con los eventos restantes (te queda ",
-    "textRandomizerOptionRerun2"     : ")",
+    "textRandomizerOptionRerun1"     : "Eliminar este elemento e vuelve a ejecutar (te quedará ",
+    "textRandomizerOptionRerun2"     : " elementos!)",
     "textRandomizerOptionInsert"     : "Inserta nuevos eventos",
 
 

@@ -1,4 +1,4 @@
-# Randomizer v2.0.0/23 Sep 2024 | Made by cplx; 11 Dec 2021.
+# Randomizer v2.0.1/03 Dec 2024 | Made by cplx; 11 Dec 2021.
 
 from time import sleep
 from copy import deepcopy
@@ -10,9 +10,9 @@ from os import system, name as sysname
 from enum import Enum, auto
 from datetime import datetime
 
-version = '2.0.0' # program version
+version = '2.0.1' # program version
 
-#
+#   
 
 groups = ['type', 'name', 'info'] # important for presets
 
@@ -221,7 +221,7 @@ class Randomizer:
 
         # importing variables: information texts
         textRandomizerEventsChosen  = message_response.get("textRandomizerEventsChosen")
-        textRandomizerEventsLeft    = message_response.get("textRandomizerEventsLeft")
+        textRandomizerEventsList    = message_response.get("textRandomizerEventsList")
         textRandomizerEventsWarning = message_response.get("textRandomizerEventsWarning")
 
         # importing variables: generics
@@ -240,38 +240,35 @@ class Randomizer:
 
         print(headerRandomizer)
 
-        resame = True # re-run without removing the chosen item
-
         while len(Events) > 1:                         # events available + event picked + events left
             result = str(rchoice(Events)).strip("[']") # picks a random event and formats to remove [] and ''
 
-            if resame == False:
-                try: Events.remove(result)
+            evlist = str(Events).translate(str.maketrans('', '', "[']")) # formats events list to remove [] and ''
 
-                except Exception:
-                    print(errorUnknown)
-                    continue
-
-            evleft = str(Events).translate(str.maketrans('', '', "[']")) # formats events list to remove [] and ''
-
-            print(f'{textRandomizerEventsChosen}: {result}.\n{textRandomizerEventsLeft}: {evleft}.\n') # The chosen event is: {result}. Your events left: {evleft}.
+            print(f'{textRandomizerEventsList}: {evlist}.\n{textRandomizerEventsChosen}: {result}.\n') # Your events list: {evleft}. The chosen event is: {result}.
 
             if len(Events) == 1:
                 break
             
             rerun = list_input(genericChooseAction,
                                choices=[(textRandomizerOptionRerunSame, '1'),
-                                        (f'{textRandomizerOptionRerun1}{len(Events)}{textRandomizerOptionRerun2}', '2'),
+                                        (f'{textRandomizerOptionRerun1}{len(Events)-1}{textRandomizerOptionRerun2}', '2'),
                                         (textRandomizerOptionInsert, '3'), (genericChooseReturn, '4'), (genericChooseExit, 'x')],
                               )
             
             match rerun:
                 case '1':                                 # re-runs with the same events
-                    resame = True
                     print(' #---#---#---#---#\n')
                     continue
                 case '2':                                 # re-runs removing events
-                    resame = False
+                    while True:
+                        try: Events.remove(result)
+
+                        except Exception:
+                            print(errorUnknown)
+                            continue
+
+                        break
                     print(' #---#---#---#---#\n')
                     continue
                 case '3': return True                     # inputs new events
